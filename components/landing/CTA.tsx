@@ -2,7 +2,6 @@
 
 import React from "react";
 
-
 export default function CTA(): JSX.Element {
   // Define event handler types for the hover effects
   const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
