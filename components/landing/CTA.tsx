@@ -1,6 +1,34 @@
 "use client";
 
-export default function CTA() {
+import React from "react";
+
+
+export default function CTA(): JSX.Element {
+  // Define event handler types for the hover effects
+  const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = e.currentTarget;
+    target.style.opacity = "0.9";
+    target.style.transform = "translateY(-2px)";
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = e.currentTarget;
+    target.style.opacity = "1";
+    target.style.transform = "translateY(0)";
+  };
+
+  const handleSecondaryMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = e.currentTarget;
+    target.style.borderColor = "rgba(255,255,255,0.3)";
+    target.style.color = "#F1F5F9";
+  };
+
+  const handleSecondaryMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = e.currentTarget;
+    target.style.borderColor = "rgba(255,255,255,0.15)";
+    target.style.color = "#CBD5E1";
+  };
+
   return (
     <section style={{ padding: "4rem 2rem 6rem" }}>
       <div style={{
@@ -27,9 +55,7 @@ export default function CTA() {
           borderRadius: "50%", filter: "blur(30px)", pointerEvents: "none",
         }} />
 
-        <div style={{
-          fontSize: "2.5rem", marginBottom: "1rem",
-        }}>🎓</div>
+        <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎓</div>
 
         <h2 style={{
           fontFamily: "'Syne', sans-serif",
@@ -56,40 +82,40 @@ export default function CTA() {
           display: "flex", gap: "1rem", justifyContent: "center",
           flexWrap: "wrap", position: "relative",
         }}>
-          <a href="/signup" style={{
-            background: "linear-gradient(135deg, #34D399, #059669)",
-            color: "#060A16", textDecoration: "none",
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 700, fontSize: "1rem",
-            padding: "0.875rem 2rem", borderRadius: "12px",
-            display: "inline-block",
-            transition: "opacity 0.2s, transform 0.2s",
-            boxShadow: "0 8px 30px rgba(52,211,153,0.3)",
-          }}
-            onMouseEnter={e => { e.target.style.opacity = "0.9"; e.target.style.transform = "translateY(-2px)"; }}
-            onMouseLeave={e => { e.target.style.opacity = "1"; e.target.style.transform = "translateY(0)"; }}
+          <a 
+            href="/signup" 
+            style={{
+              background: "linear-gradient(135deg, #34D399, #059669)",
+              color: "#060A16", textDecoration: "none",
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 700, fontSize: "1rem",
+              padding: "0.875rem 2rem", borderRadius: "12px",
+              display: "inline-block",
+              transition: "opacity 0.2s, transform 0.2s",
+              boxShadow: "0 8px 30px rgba(52,211,153,0.3)",
+            }}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             Get Started Free →
           </a>
-          <a href="/universities" style={{
-            background: "rgba(255,255,255,0.05)",
-            border: "1px solid rgba(255,255,255,0.15)",
-            color: "#CBD5E1", textDecoration: "none",
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 600, fontSize: "1rem",
-            padding: "0.875rem 2rem", borderRadius: "12px",
-            display: "inline-block",
-            transition: "all 0.2s",
-          }}
-            onMouseEnter={e => {
-              e.target.style.borderColor = "rgba(255,255,255,0.3)";
-              e.target.style.color = "#F1F5F9";
+          <a 
+            href="/universities" 
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.15)",
+              color: "#CBD5E1", textDecoration: "none",
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 600, fontSize: "1rem",
+              padding: "0.875rem 2rem", borderRadius: "12px",
+              display: "inline-block",
+              transition: "all 0.2s",
             }}
-            onMouseLeave={e => {
-              e.target.style.borderColor = "rgba(255,255,255,0.15)";
-              e.target.style.color = "#CBD5E1";
-            }}
-          >Browse Universities</a>
+            onMouseEnter={handleSecondaryMouseEnter}
+            onMouseLeave={handleSecondaryMouseLeave}
+          >
+            Browse Universities
+          </a>
         </div>
       </div>
     </section>
