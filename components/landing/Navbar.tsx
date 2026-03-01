@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -56,15 +57,20 @@ export default function Navbar() {
         display: "flex", alignItems: "center", gap: "2rem",
         fontFamily: "'DM Sans', sans-serif",
       }} className="desktop-nav">
-        {["Universities", "Merit Lists", "Entry Tests", "About"].map(link => (
-          <a key={link} href="#" style={{
+        {[
+          { label: "Universities", href: "/universities" },
+          { label: "Merit Lists", href: "/merit-lists" },
+          { label: "Entry Tests", href: "/entry-tests" },
+          { label: "About", href: "/about" },
+        ].map(link => (
+          <Link key={link.label} href={link.href} style={{
             color: "#94A3B8", fontSize: "0.9rem", textDecoration: "none",
             transition: "color 0.2s",
             fontWeight: 500,
           }}
-            onMouseEnter={e => (e.target as HTMLElement).style.color = "#34D399"}
-            onMouseLeave={e => (e.target as HTMLElement).style.color = "#94A3B8"}
-          >{link}</a>
+            onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#34D399"}
+            onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "#94A3B8"}
+          >{link.label}</Link>
         ))}
       </div>
 
