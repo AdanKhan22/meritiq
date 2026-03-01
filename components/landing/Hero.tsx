@@ -152,62 +152,88 @@ export default function Hero() {
       </p>
 
       {/* Search Bar */}
-      <div style={{
-        width: "100%", maxWidth: "600px",
-        position: "relative", zIndex: 1,
-        marginBottom: "1.5rem",
-      }}>
-        <div style={{
-          position: "relative",
-          background: "rgba(255,255,255,0.05)",
-          border: "1.5px solid rgba(52,211,153,0.3)",
-          borderRadius: "16px",
-          display: "flex", alignItems: "center",
-          padding: "0.5rem 0.5rem 0.5rem 1.25rem",
-          boxShadow: "0 0 40px rgba(52,211,153,0.08), 0 20px 60px rgba(0,0,0,0.3)",
-          backdropFilter: "blur(10px)",
-          transition: "border-color 0.2s, box-shadow 0.2s",
-        }}
-          onFocus={e => {
-            e.currentTarget.style.borderColor = "rgba(52,211,153,0.6)";
-            e.currentTarget.style.boxShadow = "0 0 40px rgba(52,211,153,0.15), 0 20px 60px rgba(0,0,0,0.3)";
-          }}
-          onBlur={e => {
-            e.currentTarget.style.borderColor = "rgba(52,211,153,0.3)";
-            e.currentTarget.style.boxShadow = "0 0 40px rgba(52,211,153,0.08), 0 20px 60px rgba(0,0,0,0.3)";
-          }}
-        >
-          <svg style={{ width: "20px", height: "20px", color: "#34D399", flexShrink: 0, marginRight: "0.75rem" }}
-            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            placeholder={displayText}
-            style={{
-              flex: 1, background: "transparent", border: "none", outline: "none",
-              color: "#F1F5F9", fontSize: "1rem",
-              fontFamily: "'DM Sans', sans-serif",
-              caretColor: "#34D399",
-            }}
-          />
-          <button style={{
-            background: "linear-gradient(135deg, #34D399, #059669)",
-            color: "#060A16", border: "none", borderRadius: "10px",
-            padding: "0.65rem 1.5rem", fontWeight: 700,
-            fontSize: "0.9rem", cursor: "pointer",
-            fontFamily: "'DM Sans', sans-serif",
-            whiteSpace: "nowrap",
-            transition: "opacity 0.2s",
-          }}
-            onMouseEnter={e => e.target.style.opacity = "0.85"}
-            onMouseLeave={e => e.target.style.opacity = "1"}
-          >Search →</button>
-        </div>
-      </div>
+    <div style={{
+  width: "100%", 
+  maxWidth: "600px",
+  position: "relative", 
+  zIndex: 1,
+  marginBottom: "1.5rem",
+  padding: "0 5px" // Prevention for side-overflow on tiny screens
+}}>
+  <div style={{
+    position: "relative",
+    background: "rgba(255,255,255,0.05)",
+    border: "1.5px solid rgba(52,211,153,0.3)",
+    borderRadius: "20px", // Smoother rounding for mobile
+    display: "flex", 
+    alignItems: "center",
+    padding: "6px", // Equal padding around for a balanced look
+    boxShadow: "0 0 40px rgba(52,211,153,0.08), 0 20px 60px rgba(0,0,0,0.3)",
+    backdropFilter: "blur(12px)",
+    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+  }}
+    onFocusCapture={e => {
+      e.currentTarget.style.borderColor = "rgba(52,211,153,0.7)";
+      e.currentTarget.style.transform = "translateY(-2px)";
+    }}
+    onBlurCapture={e => {
+      e.currentTarget.style.borderColor = "rgba(52,211,153,0.3)";
+      e.currentTarget.style.transform = "translateY(0)";
+    }}
+  >
+    {/* Search Icon - Hidden on very small screens to save space if needed, 
+        but here we keep it for visual cue */}
+    <div style={{ paddingLeft: "12px", display: "flex", alignItems: "center" }}>
+      <svg style={{ width: "20px", height: "20px", color: "#34D399", opacity: 0.8 }}
+        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    </div>
+
+    <input
+      type="text"
+      value={searchQuery}
+      onChange={e => setSearchQuery(e.target.value)}
+      placeholder={displayText}
+      style={{
+        flex: 1, 
+        background: "transparent", 
+        border: "none", 
+        outline: "none",
+        color: "#F1F5F9", 
+        fontSize: "16px", // Critical: Prevents iOS zoom-on-focus
+        fontFamily: "'DM Sans', sans-serif",
+        padding: "12px 10px",
+        caretColor: "#34D399",
+        width: "100%",
+        minWidth: "0" // Prevents input from pushing out the container
+      }}
+    />
+
+    <button style={{
+      background: "linear-gradient(135deg, #34D399, #059669)",
+      color: "#060A16", 
+      border: "none", 
+      borderRadius: "14px",
+      padding: "12px 20px", 
+      fontWeight: 800,
+      fontSize: "0.9rem", 
+      cursor: "pointer",
+      fontFamily: "'DM Sans', sans-serif",
+      whiteSpace: "nowrap",
+      boxShadow: "0 4px 12px rgba(5, 150, 105, 0.2)",
+      transition: "transform 0.2s"
+    }}
+      onMouseEnter={e => e.target.style.transform = "scale(1.02)"}
+      onMouseLeave={e => e.target.style.transform = "scale(1)"}
+    >
+      {/* Mobile-friendly text logic: can be shortened via CSS media queries 
+          or just kept concise like this */}
+      Search
+    </button>
+  </div>
+</div>
 
       {/* Quick links */}
       <div style={{
