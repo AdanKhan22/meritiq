@@ -82,76 +82,131 @@ export default function Features() {
         </div>
 
         {/* Bento grid */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gridTemplateRows: "auto",
-          gap: "1rem",
-        }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateRows: "auto",
+            gap: "1rem",
+          }}
+        >
           {features.map((feature, i) => {
             const isLarge = feature.size === "large";
             return (
-              <div key={i} style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.07)",
-                borderRadius: "24px",
-                padding: isLarge ? "2.5rem" : "1.75rem",
-                gridColumn: isLarge ? "span 2" : "span 1",
-                position: "relative",
-                overflow: "hidden",
-                transition: "transform 0.3s, border-color 0.3s, box-shadow 0.3s",
-                cursor: "default",
-                minHeight: isLarge ? "200px" : "180px",
-              }}
-                onMouseEnter={e => {
+              <div
+                key={i}
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.07)",
+                  borderRadius: "24px",
+                  padding: isLarge ? "2.5rem" : "1.75rem",
+                  gridColumn: isLarge ? "span 2" : "span 1",
+                  position: "relative",
+                  overflow: "hidden",
+                  transition: "transform 0.3s, border-color 0.3s, box-shadow 0.3s",
+                  cursor: "default",
+                  minHeight: isLarge ? "200px" : "180px",
+                  minWidth: "0", // Prevent shrinking
+                }}
+                onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-4px)";
                   e.currentTarget.style.borderColor = `${feature.accent}40`;
                   e.currentTarget.style.boxShadow = `0 20px 60px ${feature.accent}12`;
                 }}
-                onMouseLeave={e => {
+                onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
                   e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
                 {/* Background glow */}
-                <div style={{
-                  position: "absolute", top: "-20px", right: "-20px",
-                  width: "120px", height: "120px",
-                  background: `radial-gradient(circle, ${feature.accent}15 0%, transparent 70%)`,
-                  borderRadius: "50%", pointerEvents: "none",
-                }} />
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "-20px",
+                    right: "-20px",
+                    width: "120px",
+                    height: "120px",
+                    background: `radial-gradient(circle, ${feature.accent}15 0%, transparent 70%)`,
+                    borderRadius: "50%",
+                    pointerEvents: "none",
+                  }}
+                />
 
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    marginBottom: "1rem",
+                  }}
+                >
                   <span style={{ fontSize: isLarge ? "2.5rem" : "2rem" }}>{feature.icon}</span>
-                  <span style={{
-                    background: `${feature.accent}15`,
-                    border: `1px solid ${feature.accent}30`,
-                    color: feature.accent,
-                    fontSize: "0.7rem", fontWeight: 600,
-                    fontFamily: "'DM Sans', sans-serif",
-                    padding: "0.2rem 0.6rem", borderRadius: "20px",
-                    letterSpacing: "0.03em",
-                  }}>{feature.tag}</span>
+                  <span
+                    style={{
+                      background: `${feature.accent}15`,
+                      border: `1px solid ${feature.accent}30`,
+                      color: feature.accent,
+                      fontSize: "0.7rem",
+                      fontWeight: 600,
+                      fontFamily: "'DM Sans', sans-serif",
+                      padding: "0.2rem 0.6rem",
+                      borderRadius: "20px",
+                      letterSpacing: "0.03em",
+                    }}
+                  >
+                    {feature.tag}
+                  </span>
                 </div>
 
-                <h3 style={{
-                  fontFamily: "'Syne', sans-serif",
-                  fontSize: isLarge ? "1.4rem" : "1.1rem",
-                  fontWeight: 800, color: "#F1F5F9",
-                  marginBottom: "0.5rem",
-                  letterSpacing: "-0.01em",
-                }}>{feature.title}</h3>
+                <h3
+                  style={{
+                    fontFamily: "'Syne', sans-serif",
+                    fontSize: isLarge ? "1.4rem" : "1.1rem",
+                    fontWeight: 800,
+                    color: "#F1F5F9",
+                    marginBottom: "0.5rem",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {feature.title}
+                </h3>
 
-                <p style={{
-                  color: "#64748B", fontFamily: "'DM Sans', sans-serif",
-                  fontSize: "0.875rem", lineHeight: 1.65,
-                  maxWidth: isLarge ? "480px" : "100%",
-                }}>{feature.description}</p>
+                <p
+                  style={{
+                    color: "#64748B",
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: "0.875rem",
+                    lineHeight: 1.65,
+                    maxWidth: isLarge ? "480px" : "100%",
+                  }}
+                >
+                  {feature.description}
+                </p>
               </div>
             );
           })}
         </div>
+
+        <style jsx>{`
+          @media (max-width: 1024px) {
+            div[style*="grid-template-columns"] {
+              grid-template-columns: repeat(2, 1fr) !important;
+            }
+            div[style*="grid-column"] {
+              grid-column: span 1 !important;
+            }
+          }
+
+          @media (max-width: 768px) {
+            div[style*="grid-template-columns"] {
+              grid-template-columns: 1fr !important;
+            }
+            div[style*="grid-column"] {
+              grid-column: span 1 !important;
+            }
+          }
+        `}</style>
       </div>
     </section>
   );
